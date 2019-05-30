@@ -5,7 +5,7 @@ Conversational dataset from the Chit-Chat Challenge.
 ## download
 
 ```
-curl -LO https://raw.githubusercontent.com/BYU-PCCL/chitchat-dataset/master/dataset.json
+curl -L git.io/ccc-dataset-json -o dataset.json
 ```
 
 ## stats
