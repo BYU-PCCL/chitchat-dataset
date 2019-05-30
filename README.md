@@ -2,6 +2,12 @@
 
 Conversational dataset from the Chit-Chat Challenge.
 
+## download
+
+```
+curl -LO https://raw.githubusercontent.com/BYU-PCCL/chitchat-dataset/master/dataset.json
+```
+
 ## stats
 
 - 7,168 conversations
