@@ -59,7 +59,21 @@ The [dataset] is a mapping from conversation [UUID] to a conversation:
 }
 ```
 
+## examples
+
+A Python example using the [Requests] library:
+
+```python
+import requests
+
+for _id, convo in requests.get("https://git.io/ccc-dataset-json").json().items():
+    for message in convo["messages"]:
+        for utterance in message:
+            print(utterance["text"])
+```
+
 [dataset]: dataset.json
 [dataset.json]: dataset.json
 [`dataset.json`]: dataset.json
 [UUID]: https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)
+[Requests]: https://2.python-requests.org/en/master/
