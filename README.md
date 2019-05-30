@@ -18,7 +18,8 @@ curl -LO https://raw.githubusercontent.com/BYU-PCCL/chitchat-dataset/master/data
 
 The [dataset] is a mapping from conversation [UUID] to a conversation:
 
-```json {
+```json
+{
   "prompt": "What's the most interesting thing you've learned recently?",
   "ratings": { "witty": "1", "int": 5, "upbeat": 5 },
   "start": "2018-04-20T01:57:41",
