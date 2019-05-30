@@ -72,21 +72,13 @@ for _id, convo in requests.get("https://git.io/ccc-dataset-json").json().items()
             print(utterance["text"])
 ```
 
-A Julia example:
-```julia
-using HTTP
-using JSON
+For more examples see [`examples/`].
 
-for (_id, convo) in JSON.parse(String(HTTP.get("https://git.io/ccc-dataset-json").body))
-	for message in convo["messages"]
-		for utterance in message
-			println(utterance["text"])
-		end
-	end
-end
-```
+
 [dataset]: dataset.json
 [dataset.json]: dataset.json
 [`dataset.json`]: dataset.json
 [UUID]: https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)
 [Requests]: https://2.python-requests.org/en/master/
+[examples]: examples/
+[`examples/`]: examples/
