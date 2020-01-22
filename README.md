@@ -1,6 +1,7 @@
 # chitchat-dataset
 
-Conversational dataset from the Chit-Chat Challenge.
+Open-domain conversational dataset from the BYU [Perception, Control &
+Cognition] lab's [Chit-Chat Challenge].
 
 ## install
 
@@ -79,6 +80,8 @@ The [dataset] is a mapping from conversation [UUID] to a conversation:
 }
 ```
 
+[perception, control & cognition]: https://pcc.cs.byu.edu
+[chit-chat challenge]: https://pcc.cs.byu.edu/2018/04/18/the-chit-chat-challenge/
 [dataset]: chitchat_dataset/dataset.py
 [dataset.json]: chitchat_dataset/dataset.py
 [`dataset.json`]: chitchat_dataset/dataset.py
