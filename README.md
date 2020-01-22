@@ -2,11 +2,31 @@
 
 Conversational dataset from the Chit-Chat Challenge.
 
-## download
+## install
 
+```bash
+pip3 install chitchat_dataset
 ```
-curl -L git.io/ccc-dataset-json -o dataset.json
+
+_or_ simply download it:
+
+```bash
+curl -L git.io/ccc-dataset -o dataset.json
 ```
+
+## usage
+
+```python
+import chitchat_dataset as ccc
+
+dataset = ccc.Dataset()
+
+# Dataset is a subclass of dict()
+for convo_id, convo in dataset.items():
+    print(convo_id, convo)
+```
+
+See [`examples/`] for other languages.
 
 ## stats
 
@@ -59,26 +79,10 @@ The [dataset] is a mapping from conversation [UUID] to a conversation:
 }
 ```
 
-## examples
-
-A Python example using the [Requests] library:
-
-```python
-import requests
-
-for _id, convo in requests.get("https://git.io/ccc-dataset-json").json().items():
-    for message in convo["messages"]:
-        for utterance in message:
-            print(utterance["text"])
-```
-
-For more examples see [`examples/`].
-
-
-[dataset]: dataset.json
-[dataset.json]: dataset.json
-[`dataset.json`]: dataset.json
-[UUID]: https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)
-[Requests]: https://2.python-requests.org/en/master/
+[dataset]: chitchat_dataset/dataset.py
+[dataset.json]: chitchat_dataset/dataset.py
+[`dataset.json`]: chitchat_dataset/dataset.py
+[uuid]: https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)
+[requests]: https://2.python-requests.org/en/master/
 [examples]: examples/
 [`examples/`]: examples/
