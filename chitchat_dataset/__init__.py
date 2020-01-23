@@ -27,7 +27,7 @@ class FlatDataset:
     """
 
     def __init__(
-        self, path=None, end_of_utterance_token="<EOU>", end_of_message_token="<EOM>",
+        self, path=None, end_of_utterance_token="<EOU>", end_of_message_token="<EOM>"
     ):
         self.path = path if path is not None else _default_dataset_path()
         self.eou_token = end_of_utterance_token
