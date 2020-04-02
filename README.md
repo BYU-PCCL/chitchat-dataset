@@ -1,7 +1,14 @@
 # chitchat-dataset
 
-Open-domain conversational dataset from the BYU [Perception, Control &
-Cognition] lab's [Chit-Chat Challenge].
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/chitchat_dataset)](https://pypi.org/project/chitchat-dataset/)
+[![PyPI](https://img.shields.io/pypi/v/chitchat_dataset)](https://pypi.org/project/chitchat-dataset/)
+[![PyPI - Wheel](https://img.shields.io/pypi/wheel/chitchat_dataset)](https://pypi.org/project/chitchat-dataset/)
+
+[![CI](https://github.com/BYU-PCCL/chitchat-dataset/workflows/CI/badge.svg)](https://github.com/BYU-PCCL/chitchat-dataset/actions?query=workflow%3ACI)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+Open-domain conversational dataset from the BYU
+[Perception, Control & Cognition] lab's [Chit-Chat Challenge].
 
 ## install
 
@@ -9,7 +16,7 @@ Cognition] lab's [Chit-Chat Challenge].
 pip3 install chitchat_dataset
 ```
 
-_or_ simply download it:
+_or_ simply download the raw dataset:
 
 ```bash
 curl -LO https://raw.githubusercontent.com/BYU-PCCL/chitchat-dataset/master/chitchat_dataset/dataset.json
