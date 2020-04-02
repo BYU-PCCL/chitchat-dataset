@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "chitchat-dataset"
-version = "0.3.0"
-description = """\
-    Open-domain conversational dataset \
-    from the BYU Perception, Control & Cognition lab's Chit-Chat Challenge.\
-"""
-authors = ["William Myers <mwilliammyers@gmail.com>"]
+version = "0.3.1"
+description = "Open-domain conversational dataset from the BYU PCC lab"
+readme = "README.md"
 license = "MIT"
+authors = ["William Myers <mwilliammyers@gmail.com>"]
+homepage = "https://github.com/BYU-PCCL/chitchat-dataset"
+repository = "https://github.com/BYU-PCCL/chitchat-dataset"
 keywords = ["dataset", "science", "machine learning", "conversation"]
 
 [tool.poetry.dependencies]
