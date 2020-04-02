@@ -1,12 +1,18 @@
-# https://flit.readthedocs.io/en/latest/
-[build-system]
-requires = ["flit_core >=2,<3"]
-build-backend = "flit_core.buildapi"
+[tool.poetry]
+name = "chitchat-dataset"
+version = "0.2.0"
+description = """\
+    Open-domain conversational dataset \
+    from the BYU Perception, Control & Cognition lab's Chit-Chat Challenge.\
+"""
+authors = ["William Myers <mwilliammyers@gmail.com>"]
+license = "MIT"
+keywords = ["dataset", "science", "machine learning", "conversation"]
 
-[tool.flit.metadata]
-module = "chitchat_dataset"
-author = "William Myers"
-author-email = "mwilliammyers@gmail.com"
-home-page = "https://github.com/byu-pccl/chitchat-dataset"
-classifiers = ["License :: OSI Approved :: MIT License"]
-description-file = "README.md"
+[tool.poetry.dependencies]
+# TODO: require an older python3 version; some dev dependencies require ^3.6
+python = "^3.6"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

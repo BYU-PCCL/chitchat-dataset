@@ -33,7 +33,7 @@ struct Conversation {
 type Dataset = HashMap<Uuid, Conversation>;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let data: Dataset = reqwest::get("https://git.io/ccc-dataset")?.json()?;
+    let data: Dataset = reqwest::get("https://raw.githubusercontent.com/BYU-PCCL/chitchat-dataset/master/chitchat_dataset/dataset.json")?.json()?;
 
     for (_id, convo) in &data {
         for message in &convo.messages {

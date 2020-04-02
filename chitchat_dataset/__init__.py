@@ -1,21 +1,19 @@
 """Chit Chat Challenge dataset."""
-
-__version__ = "0.2.0"
-
 import json
 import os
+from typing import Optional
 
 
-def _default_dataset_path():
+def _default_dataset_path() -> str:
     here = os.path.abspath(os.path.dirname(__file__))
-    # due to python's package management, this has a `.py` extension
-    return os.path.join(here, "dataset.py")
+    return os.path.join(here, "dataset.json")
 
 
 class Dataset(dict):
     """Chit Chat Challenge dataset."""
 
-    def __init__(self, path=None):
+    def __init__(self, path: Optional[str] = None) -> None:
+        """Instantiate a new Dataset object."""
         self.path = path if path is not None else _default_dataset_path()
         super(Dataset, self).__init__(json.load(open(self.path)))
 

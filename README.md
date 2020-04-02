@@ -12,7 +12,7 @@ pip3 install chitchat_dataset
 _or_ simply download it:
 
 ```bash
-curl -L git.io/ccc-dataset -o dataset.json
+curl -LO https://raw.githubusercontent.com/BYU-PCCL/chitchat-dataset/master/chitchat_dataset/dataset.json
 ```
 
 ## usage
