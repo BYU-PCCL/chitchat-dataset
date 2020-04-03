@@ -18,28 +18,37 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        python: [3.6, 3.7, 3.8]
-        poetry: [1.0.5]
+        python-version: [3.6, 3.7, 3.8]
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Setup python
+        uses: actions/setup-python@v1.2.0
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install poetry
+        run: |
+          pip install --upgrade pip wheel
+          pip install poetry
+
+      - name: Cache poetry virtualenv
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            poetry-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
-        uses: abatilo/actions-poetry@v1.5.0
-        with:
-          python_version: ${{ matrix.python }}
-          poetry_version: ${{ matrix.poetry }}
-          args: install --no-root
+        run: poetry install --no-root
+        if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Run mypy
-        uses: abatilo/actions-poetry@v1.5.0
-        with:
-          python_version: ${{ matrix.python }}
-          poetry_version: ${{ matrix.poetry }}
-          args: run mypy chitchat_dataset
+        run: poetry run mypy chitchat_dataset
 
       - name: Run flakehell
-        uses: abatilo/actions-poetry@v1.5.0
-        with:
-          python_version: ${{ matrix.python }}
-          poetry_version: ${{ matrix.poetry }}
-          args: run flakehell lint
+        run: poetry run flakehell lint
