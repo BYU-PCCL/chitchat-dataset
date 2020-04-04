@@ -13,7 +13,7 @@ on:
       - "**.sh"
 
 jobs:
-  lint:
+  lint_and_test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -52,3 +52,6 @@ jobs:
 
       - name: Run flakehell
         run: poetry run flakehell lint
+
+      - name: Run pytest
+        run: poetry run pytest --verbose

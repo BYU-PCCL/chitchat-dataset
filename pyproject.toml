@@ -25,6 +25,7 @@ flakehell = "^0.3.3"
 isort = { extras = ["pyproject"], version = "^4.3.21" }
 mypy = "^0.770"
 pep8-naming = "^0.10.0"
+pytest = "^5.4.1"
 
 [tool.flakehell]
 exclude = [
