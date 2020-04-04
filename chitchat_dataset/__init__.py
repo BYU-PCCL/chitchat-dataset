@@ -1,20 +1,17 @@
 """Chit Chat Challenge dataset."""
 import json
 import os
-from typing import Iterator, Optional
+from typing import Iterator
 
-
-def _default_dataset_path() -> str:
-    here = os.path.abspath(os.path.dirname(__file__))
-    return os.path.join(here, "dataset.json")
+_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), "dataset.json")
 
 
 class Dataset(dict):
     """Chit Chat Challenge dataset."""
 
-    def __init__(self, path: Optional[str] = None) -> None:
+    def __init__(self, path: str = _PATH) -> None:
         """Instantiate a new Dataset object."""
-        self.path = path if path is not None else _default_dataset_path()
+        self.path = path
         super(Dataset, self).__init__(json.load(open(self.path)))
 
 
@@ -25,9 +22,9 @@ class ConversationDataset:
     e.g. `[["message1", "message2", ...], ...]`.
     """
 
-    def __init__(self, path: str = None, end_of_utterance_token: str = " ") -> None:
+    def __init__(self, path: str = _PATH, end_of_utterance_token: str = " ") -> None:
         """Instantiate a new ConversationDataset object."""
-        self.path = path if path is not None else _default_dataset_path()
+        self.path = path
         self.eou_token = end_of_utterance_token
         self._data = json.load(open(self.path))
 
@@ -44,16 +41,10 @@ class MessageDataset:
     e.g. `["message1", "message2", ...]`.
     """
 
-    def __init__(
-        self,
-        path: str = None,
-        end_of_utterance_token: str = " ",
-        end_of_message_token: str = "<EOM>",
-    ) -> None:
+    def __init__(self, path: str = _PATH, end_of_utterance_token: str = " ") -> None:
         """Instantiate a new MessageDataset object."""
-        self.path = path if path is not None else _default_dataset_path()
+        self.path = path
         self.eou_token = end_of_utterance_token
-        self.eom_token = end_of_message_token
         self._data = json.load(open(self.path))
 
     def __iter__(self) -> Iterator:
