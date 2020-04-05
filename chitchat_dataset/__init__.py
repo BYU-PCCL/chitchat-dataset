@@ -1,7 +1,7 @@
 """Chit Chat Challenge dataset."""
 import json
 import os
-from typing import Iterator
+from typing import Iterable, Iterator, Tuple
 
 _PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), "dataset.json")
 
@@ -32,6 +32,40 @@ class ConversationDataset:
         """Iterate over conversations."""
         for conv in self._data.values():
             yield (self.eou_token.join(u["text"] for u in m) for m in conv["messages"])
+
+
+class CompoundingConversationDataset:
+    """Chit Chat Challenge dataset.
+
+    The dataset is an iterator over compounding input/target example tuples of the
+    form (assuming a 4 turn conversation and an `end_of_message_token` of `<TURN>`):
+    ```
+    ("message1", "message2")
+    ("message1<TURN>message2", "message3")
+    ("message1<TURN>message2<TURN>message3", "message4")
+    ```
+    """
+
+    def __init__(
+        self,
+        path: str = _PATH,
+        end_of_message_token="<EOM>",
+        end_of_utterance_token: str = " ",
+        prefix: str = "",
+    ) -> None:
+        """Instantiate a new ConversationDataset object."""
+        self.path = path
+        self.eom_token = end_of_message_token
+        self.eou_token = end_of_utterance_token
+        self.prefix = prefix
+        self._data = json.load(open(self.path))
+
+    def __iter__(self) -> Iterator[Iterator]:
+        """Iterate over input/target tuples."""
+        for conv in self._data.values():
+            conv = [self.eou_token.join(u["text"] for u in m) for m in conv["messages"]]
+            for i in range(1, len(conv)):
+                yield self.prefix + self.eom_token.join(conv[:i]), conv[i]
 
 
 class MessageDataset:

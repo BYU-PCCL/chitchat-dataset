@@ -8,11 +8,11 @@ class TestDataset:
     _dataset = ccc.Dataset()
 
     def test_has_correct_length(self) -> None:
-        """Tests that it has the correct length."""
+        """Test that it has the correct length."""
         assert len(list(self._dataset)) == 7168
 
     def test_has_approx_correct_order(self) -> None:
-        """Tests that it in approximately the correct order."""
+        """Test that it in approximately the correct order."""
         keys = list(self._dataset.keys())
 
         assert keys[0] == "a07edb12-6b91-4138-b11e-02421888d699"
@@ -34,13 +34,21 @@ class TestConversationDataset:
     """Unit test for the ConversationDataset class."""
 
     def test_has_correct_length(self) -> None:
-        """Tests that it has the correct length."""
+        """Test that it has the correct length."""
         assert len(list(ccc.ConversationDataset())) == 7168
+
+
+class TestCompoundingConversationDataset:
+    """Unit test for the CompoundingConversationDataset class."""
+
+    def test_has_correct_length(self) -> None:
+        """Test that it has the correct length."""
+        assert len(list(ccc.CompoundingConversationDataset())) == 131569
 
 
 class TestMessageDataset:
     """Unit test for the MessageDataset class."""
 
     def test_has_correct_length(self) -> None:
-        """Tests that it has the correct length."""
+        """Test that it has the correct length."""
         assert len(list(ccc.MessageDataset())) == 138737
