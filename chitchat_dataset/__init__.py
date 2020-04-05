@@ -1,7 +1,7 @@
 """Chit Chat Challenge dataset."""
 import json
 import os
-from typing import Iterable, Iterator, Tuple
+from typing import Iterator, Tuple
 
 _PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), "dataset.json")
 
@@ -49,7 +49,7 @@ class CompoundingConversationDataset:
     def __init__(
         self,
         path: str = _PATH,
-        end_of_message_token="<EOM>",
+        end_of_message_token: str = "<EOM>",
         end_of_utterance_token: str = " ",
         prefix: str = "",
     ) -> None:
@@ -60,7 +60,7 @@ class CompoundingConversationDataset:
         self.prefix = prefix
         self._data = json.load(open(self.path))
 
-    def __iter__(self) -> Iterator[Iterator]:
+    def __iter__(self) -> Iterator[Tuple[str, str]]:
         """Iterate over input/target tuples."""
         for conv in self._data.values():
             conv = [self.eou_token.join(u["text"] for u in m) for m in conv["messages"]]
