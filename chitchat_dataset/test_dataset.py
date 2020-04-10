@@ -60,34 +60,40 @@ class TestMessageDataset:
 
 def test_compound_conversation() -> None:
     """Tests that it returns the correct length."""
-    convo = list(string.ascii_lowercase)
-    result = list(ccc.compound_conversation(convo, prefix="", eom_token=" "))
+    result = list(
+        ccc.compound_conversation(
+            list(string.ascii_lowercase),
+            odd_speaker_token="1",
+            even_speaker_token="2",
+            prefix="",
+        )
+    )
     expected_result = [
-        ("a", "b"),
-        ("a b", "c"),
-        ("a b c", "d"),
-        ("a b c d", "e"),
-        ("a b c d e", "f"),
-        ("a b c d e f", "g"),
-        ("a b c d e f g", "h"),
-        ("a b c d e f g h", "i"),
-        ("a b c d e f g h i", "j"),
-        ("a b c d e f g h i j", "k"),
-        ("a b c d e f g h i j k", "l"),
-        ("a b c d e f g h i j k l", "m"),
-        ("a b c d e f g h i j k l m", "n"),
-        ("a b c d e f g h i j k l m n", "o"),
-        ("a b c d e f g h i j k l m n o", "p"),
-        ("a b c d e f g h i j k l m n o p", "q"),
-        ("a b c d e f g h i j k l m n o p q", "r"),
-        ("a b c d e f g h i j k l m n o p q r", "s"),
-        ("a b c d e f g h i j k l m n o p q r s", "t"),
-        ("a b c d e f g h i j k l m n o p q r s t", "u"),
-        ("a b c d e f g h i j k l m n o p q r s t u", "v"),
-        ("a b c d e f g h i j k l m n o p q r s t u v", "w"),
-        ("a b c d e f g h i j k l m n o p q r s t u v w", "x"),
-        ("a b c d e f g h i j k l m n o p q r s t u v w x", "y"),
-        ("a b c d e f g h i j k l m n o p q r s t u v w x y", "z"),
+        ("1a", "2b"),
+        ("1a2b", "1c"),
+        ("1a2b1c", "2d"),
+        ("1a2b1c2d", "1e"),
+        ("1a2b1c2d1e", "2f"),
+        ("1a2b1c2d1e2f", "1g"),
+        ("1a2b1c2d1e2f1g", "2h"),
+        ("1a2b1c2d1e2f1g2h", "1i"),
+        ("1a2b1c2d1e2f1g2h1i", "2j"),
+        ("1a2b1c2d1e2f1g2h1i2j", "1k"),
+        ("1a2b1c2d1e2f1g2h1i2j1k", "2l"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l", "1m"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m", "2n"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n", "1o"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o", "2p"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p", "1q"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q", "2r"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r", "1s"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r1s", "2t"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r1s2t", "1u"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r1s2t1u", "2v"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r1s2t1u2v", "1w"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r1s2t1u2v1w", "2x"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r1s2t1u2v1w2x", "1y"),
+        ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r1s2t1u2v1w2x1y", "2z"),
     ]
     assert len(result) == 25
     assert result == expected_result
