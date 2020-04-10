@@ -1,0 +1,33 @@
+name: publish
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v1.2.0
+        with:
+          version: "3.x"
+
+      - uses: Gr1N/setup-poetry@v2
+
+      - name: Install dependencies
+        run: poetry install --no-root
+
+      - name: Run pytest
+        run: poetry run pytest --verbose
+
+      - name: Publish
+        run: poetry publish --build
+        env:
+          POETRY_HTTP_BASIC_PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          POETRY_HTTP_BASIC_PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
