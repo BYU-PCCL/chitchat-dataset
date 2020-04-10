@@ -37,13 +37,7 @@ class ConversationDataset:
 class CompoundingConversationDataset:
     """Chit Chat Challenge dataset.
 
-    The dataset is an iterator over compounding input/target example tuples of the
-    form (assuming a 4 turn conversation and an `end_of_message_token` of `<TURN>`):
-    ```
-    ("message1", "message2")
-    ("message1<TURN>message2", "message3")
-    ("message1<TURN>message2<TURN>message3", "message4")
-    ```
+    See `compound_conversation()` for specifics of the dataset format.
     """
 
     def __init__(
@@ -64,8 +58,8 @@ class CompoundingConversationDataset:
         """Iterate over input/target tuples."""
         for conv in self._data.values():
             conv = [self.eou_token.join(u["text"] for u in m) for m in conv["messages"]]
-            for i in range(1, len(conv)):
-                yield self.prefix + self.eom_token.join(conv[:i]), conv[i]
+            for m in compound_conversation(conv, self.prefix, self.eom_token):
+                yield m
 
 
 class MessageDataset:
@@ -86,3 +80,21 @@ class MessageDataset:
         for conv in self._data.values():
             for message in conv["messages"]:
                 yield self.eou_token.join(u["text"] for u in message)
+
+
+def compound_conversation(
+    convo: Iterator[str], prefix: str, eom_token: str
+) -> Iterator[Tuple[str, str]]:
+    """Compounds a single conversation.
+
+    Returns an iterator over compounding input/target example tuples of the
+    form (assuming a 4 turn conversation and an `end_of_message_token` of `<TURN>`):
+    ```
+    ("message1", "message2")
+    ("message1<TURN>message2", "message3")
+    ("message1<TURN>message2<TURN>message3", "message4")
+    ```
+    """
+    convo = list(convo)
+    for i in range(1, len(convo)):
+        yield prefix + eom_token.join(convo[:i]), convo[i]

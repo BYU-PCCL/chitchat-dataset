@@ -1,5 +1,9 @@
 """Simple unit tests for chitchat_dataset."""
+import string
+
 import chitchat_dataset as ccc
+
+# TODO(mwilliammyers): add more/better tests  # noqa: W0511
 
 
 class TestDataset:
@@ -8,11 +12,11 @@ class TestDataset:
     _dataset = ccc.Dataset()
 
     def test_has_correct_length(self) -> None:
-        """Test that it has the correct length."""
+        """Tests that it has the correct length."""
         assert len(list(self._dataset)) == 7168
 
     def test_has_approx_correct_order(self) -> None:
-        """Test that it in approximately the correct order."""
+        """Tests that it in approximately the correct order."""
         keys = list(self._dataset.keys())
 
         assert keys[0] == "a07edb12-6b91-4138-b11e-02421888d699"
@@ -34,7 +38,7 @@ class TestConversationDataset:
     """Unit test for the ConversationDataset class."""
 
     def test_has_correct_length(self) -> None:
-        """Test that it has the correct length."""
+        """Tests that it has the correct length."""
         assert len(list(ccc.ConversationDataset())) == 7168
 
 
@@ -42,7 +46,7 @@ class TestCompoundingConversationDataset:
     """Unit test for the CompoundingConversationDataset class."""
 
     def test_has_correct_length(self) -> None:
-        """Test that it has the correct length."""
+        """Tests that it has the correct length."""
         assert len(list(ccc.CompoundingConversationDataset())) == 131569
 
 
@@ -50,5 +54,40 @@ class TestMessageDataset:
     """Unit test for the MessageDataset class."""
 
     def test_has_correct_length(self) -> None:
-        """Test that it has the correct length."""
+        """Tests that it has the correct length."""
         assert len(list(ccc.MessageDataset())) == 138737
+
+
+def test_compound_conversation() -> None:
+    """Tests that it returns the correct length."""
+    convo = list(string.ascii_lowercase)
+    result = list(ccc.compound_conversation(convo, prefix="", eom_token=" "))
+    expected_result = [
+        ("a", "b"),
+        ("a b", "c"),
+        ("a b c", "d"),
+        ("a b c d", "e"),
+        ("a b c d e", "f"),
+        ("a b c d e f", "g"),
+        ("a b c d e f g", "h"),
+        ("a b c d e f g h", "i"),
+        ("a b c d e f g h i", "j"),
+        ("a b c d e f g h i j", "k"),
+        ("a b c d e f g h i j k", "l"),
+        ("a b c d e f g h i j k l", "m"),
+        ("a b c d e f g h i j k l m", "n"),
+        ("a b c d e f g h i j k l m n", "o"),
+        ("a b c d e f g h i j k l m n o", "p"),
+        ("a b c d e f g h i j k l m n o p", "q"),
+        ("a b c d e f g h i j k l m n o p q", "r"),
+        ("a b c d e f g h i j k l m n o p q r", "s"),
+        ("a b c d e f g h i j k l m n o p q r s", "t"),
+        ("a b c d e f g h i j k l m n o p q r s t", "u"),
+        ("a b c d e f g h i j k l m n o p q r s t u", "v"),
+        ("a b c d e f g h i j k l m n o p q r s t u v", "w"),
+        ("a b c d e f g h i j k l m n o p q r s t u v w", "x"),
+        ("a b c d e f g h i j k l m n o p q r s t u v w x", "y"),
+        ("a b c d e f g h i j k l m n o p q r s t u v w x y", "z"),
+    ]
+    assert len(result) == 25
+    assert result == expected_result
