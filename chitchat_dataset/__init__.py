@@ -1,7 +1,7 @@
 """Chit Chat Challenge dataset."""
 import json
 import os
-from typing import Iterator, Tuple
+from typing import Iterable, Iterator, Tuple
 
 _PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), "dataset.json")
 
@@ -83,7 +83,7 @@ class MessageDataset:
 
 
 def compound_conversation(
-    convo: Iterator[str], prefix: str, eom_token: str
+    convo: Iterable[str], prefix: str, eom_token: str
 ) -> Iterator[Tuple[str, str]]:
     """Compounds a single conversation.
 
