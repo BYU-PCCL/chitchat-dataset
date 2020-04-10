@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chitchat-dataset"
-version = "0.7.0"
+version = "0.8.0"
 description = "Open-domain conversational dataset from the BYU PCC lab"
 readme = "README.md"
 license = "MIT"
