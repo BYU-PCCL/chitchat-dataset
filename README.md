@@ -87,6 +87,18 @@ The [dataset] is a mapping from conversation [UUID] to a conversation:
 }
 ```
 
+# how to cite
+
+If you extend or use this work, please cite the paper where it was introduced:
+
+```
+@article{myers2020conversational,
+  title={Conversational Scaffolding: An Analogy-Based Approach to Response Prioritization in Open-Domain Dialogs},
+  author={Myers, Will and Etchart, Tyler and Fulda, Nancy},
+  year={2020}
+}
+```
+
 [perception, control & cognition]: https://pcc.cs.byu.edu
 [chit-chat challenge]: https://pcc.cs.byu.edu/2018/04/18/the-chit-chat-challenge/
 [dataset]: chitchat_dataset/dataset.py
