@@ -10,7 +10,7 @@ class Dataset(dict):
     """Chit Chat Challenge dataset."""
 
     def __init__(self, path: str = _PATH) -> None:
-        """Instantiate a new Dataset object."""
+        """Instantiates a new Dataset object."""
         self.path = path
         super(Dataset, self).__init__(json.load(open(self.path)))
 
@@ -19,17 +19,17 @@ class ConversationDataset:
     """Chit Chat Challenge dataset.
 
     The dataset is an iterator over conversations;
-    e.g. `[["message1", "message2", ...], ...]`.
+    e.g. ``[["message1", "message2", ...], ...]``.
     """
 
     def __init__(self, path: str = _PATH, end_of_utterance_token: str = " ") -> None:
-        """Instantiate a new ConversationDataset object."""
+        """Instantiates a new ConversationDataset object."""
         self.path = path
         self.eou_token = end_of_utterance_token
         self._data = json.load(open(self.path))
 
     def __iter__(self) -> Iterator[Iterator]:
-        """Iterate over conversations."""
+        """Iterates over conversations."""
         for conv in self._data.values():
             yield (self.eou_token.join(u["text"] for u in m) for m in conv["messages"])
 
@@ -37,7 +37,7 @@ class ConversationDataset:
 class CompoundingConversationDataset:
     """Chit Chat Challenge dataset.
 
-    See `compound_conversation()` for specifics of the dataset format.
+    See ``compound_conversation()`` for specifics of the dataset format.
     """
 
     def __init__(
@@ -48,7 +48,7 @@ class CompoundingConversationDataset:
         end_of_utterance_token: str = " ",
         prefix: str = "",
     ) -> None:
-        """Instantiate a new ConversationDataset object."""
+        """Instantiates a new ConversationDataset object."""
         self.path = path
         self.odd_speaker_token = odd_speaker_token
         self.even_speaker_token = even_speaker_token
@@ -57,7 +57,7 @@ class CompoundingConversationDataset:
         self._data = json.load(open(self.path))
 
     def __iter__(self) -> Iterator[Tuple[str, str]]:
-        """Iterate over input/target tuples."""
+        """Iterates over input/target tuples."""
         for conv in self._data.values():
             conv = [self.eou_token.join(u["text"] for u in m) for m in conv["messages"]]
             for example in compound_conversation(
@@ -70,17 +70,17 @@ class MessageDataset:
     """Chit Chat Challenge dataset.
 
     The dataset is an iterator over messages for all conversation as a flat list;
-    e.g. `["message1", "message2", ...]`.
+    e.g. ``["message1", "message2", ...]``.
     """
 
     def __init__(self, path: str = _PATH, end_of_utterance_token: str = " ") -> None:
-        """Instantiate a new MessageDataset object."""
+        """Instantiates a new MessageDataset object."""
         self.path = path
         self.eou_token = end_of_utterance_token
         self._data = json.load(open(self.path))
 
     def __iter__(self) -> Iterator:
-        """Iterate over messages."""
+        """Iterates over messages."""
         for conv in self._data.values():
             for message in conv["messages"]:
                 yield self.eou_token.join(u["text"] for u in message)
@@ -101,9 +101,8 @@ def compound_conversation(
         ("<s1>message1<s2>message2", "<s1>message3")
         ("<s1>message1<s2>message2<s1>message3", "<s2>message4")
 
-    Where:
-        * ``<s1>`` denotes the ``odd_speaker_token``
-        * ``<s2>`` denotes the ``even_speaker_token``
+    Where: ``<s1>`` denotes the ``odd_speaker_token`` and 
+    ``<s2>`` denotes the ``even_speaker_token``
     """
     # NB: switch even and odd tokens because we start at 1
     even_token = odd_speaker_token
