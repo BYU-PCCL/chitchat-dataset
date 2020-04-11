@@ -95,11 +95,10 @@ def test_compound_conversation() -> None:
         ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r1s2t1u2v1w2x", "1y"),
         ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r1s2t1u2v1w2x1y", "2z"),
     ]
-    assert len(result) == 25
     assert result == expected_result
 
 
-def test_prepend_alternating():
+def test_prepend_cycle() -> None:
     """Tests ``prepend_alternating``."""
     result = list(ccc.prepend_cycle(string.ascii_lowercase, ["1", "2"]))
     expected_result = [
