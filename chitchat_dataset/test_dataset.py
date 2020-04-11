@@ -59,12 +59,12 @@ class TestMessageDataset:
 
 
 def test_compound_conversation() -> None:
-    """Tests that it returns the correct length."""
+    """Tests ``compound_conversation``."""
     result = list(
         ccc.compound_conversation(
-            list(string.ascii_lowercase),
-            odd_speaker_token="1",
-            even_speaker_token="2",
+            string.ascii_lowercase,
+            first_speaker_token="1",
+            second_speaker_token="2",
             prefix="",
         )
     )
@@ -96,4 +96,38 @@ def test_compound_conversation() -> None:
         ("1a2b1c2d1e2f1g2h1i2j1k2l1m2n1o2p1q2r1s2t1u2v1w2x1y", "2z"),
     ]
     assert len(result) == 25
+    assert result == expected_result
+
+
+def test_prepend_alternating():
+    """Tests ``prepend_alternating``."""
+    result = list(ccc.prepend_cycle(string.ascii_lowercase, ["1", "2"]))
+    expected_result = [
+        "1a",
+        "2b",
+        "1c",
+        "2d",
+        "1e",
+        "2f",
+        "1g",
+        "2h",
+        "1i",
+        "2j",
+        "1k",
+        "2l",
+        "1m",
+        "2n",
+        "1o",
+        "2p",
+        "1q",
+        "2r",
+        "1s",
+        "2t",
+        "1u",
+        "2v",
+        "1w",
+        "2x",
+        "1y",
+        "2z",
+    ]
     assert result == expected_result
