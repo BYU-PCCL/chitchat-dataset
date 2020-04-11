@@ -14,7 +14,7 @@ flake8:	## Run flake8
 lint:	mypy flake8 ## Lint the code with mypy and flake8
 
 test:	## Run the tests
-	poetry run pytest
+	poetry run pytest --verbose
 
 .version: version=required
 .version:
