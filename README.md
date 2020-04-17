@@ -24,6 +24,8 @@ curl -LO https://raw.githubusercontent.com/BYU-PCCL/chitchat-dataset/master/chit
 
 ## usage
 
+More formal docs should be coming soon, but for now, see [`chitchat_dataset/__init__.py`](chitchat_dataset/__init__.py) for more options.
+
 ```python
 import chitchat_dataset as ccc
 
@@ -32,6 +34,11 @@ dataset = ccc.Dataset()
 # Dataset is a subclass of dict()
 for convo_id, convo in dataset.items():
     print(convo_id, convo)
+```
+
+Or get the messages in a flat list:
+```python
+messages = list(ccc.MessageDataset())
 ```
 
 See [`examples/`] for other languages.
@@ -86,6 +93,8 @@ The [dataset] is a mapping from conversation [UUID] to a conversation:
   ]
 }
 ```
+
+This makes it convenient to represent multi-message conversational turns etc., preserving the structure/flow of the conversation.
 
 # how to cite
 
