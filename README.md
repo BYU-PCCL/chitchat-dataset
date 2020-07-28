@@ -101,11 +101,12 @@ This makes it convenient to represent multi-message conversational turns etc., p
 If you extend or use this work, please cite the paper where it was introduced:
 
 ```
-@article{myers2020conversational,
-  title={Conversational Scaffolding: An Analogy-Based Approach to Response Prioritization in Open-Domain Dialogs},
-  author={Myers, Will and Etchart, Tyler and Fulda, Nancy},
-  year={2020}
-}
+@inproceedings{myers2020conversational,
+   title={Conversational Scaffolding: An Analogy-Based Approach to  Response Prioritization in Open-Domain Dialogs},
+   author={Myers, Will and Etchart, Tyler and Fulda, Nancy},
+   booktitle={Proceedings of the 12th International Conference on Agents and Artificial Intelligence (ICAART)},
+   year={2020}
+ }
 ```
 
 [perception, control & cognition]: https://pcc.cs.byu.edu
